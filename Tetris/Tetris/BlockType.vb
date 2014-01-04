@@ -8,6 +8,7 @@ Public Class BlockType
     Private _eastOffsets As Point()
     Private _southOffsets As Point()
     Private _westOffsets As Point()
+    Public Shared NumberOfBlocks As Integer = 4
 
     Public ReadOnly Property TypeName() As String
         Get
