@@ -46,5 +46,10 @@ Public Class BlockType
         Me._eastOffsets = EastOffsets
         Me._southOffsets = SouthOffsets
         Me._westOffsets = WestOffsets
+        If Me._northOffsets.Length() = NumberOfBlocks - 1 And Me._eastOffsets.Length() = NumberOfBlocks - 1 And Me._southOffsets.Length() = NumberOfBlocks - 1 And Me._westOffsets.Length() = NumberOfBlocks - 1 Then
+            ''Do nothing
+        Else
+            MsgBox("Check Integrity of Input Data of Block Types", MsgBoxStyle.Critical)
+        End If
     End Sub
 End Class
