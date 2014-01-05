@@ -67,33 +67,34 @@ Public Class Block
         Me._squarePositions(BlockType.NumberOfBlocks - 1).Y = Me._center.Y
     End Sub
 
-    Public Sub rotate()
-        Select Case Me._direction
-            Case 1
-                Me._direction = 2
-            Case 2
-                Me._direction = 3
-            Case 3
-                Me._direction = 4
-            Case 4
-                Me._direction = 1
-        End Select
+    Public Sub Rotate()
+        If Me._direction < 4 Then
+            Me._direction += 1
+        Else
+            Me._direction = 1
+        End If
         Me.updatePositions()
     End Sub
 
-    Public Sub moveDown()
+    Public Sub MoveDown()
         Me._center.Y += 1
         Me.updatePositions()
     End Sub
 
-    Public Sub moveLeft()
+    Public Sub MoveLeft()
         Me._center.X -= 1
         Me.updatePositions()
     End Sub
 
-    Public Sub moveRight()
+    Public Sub MoveRight()
         Me._center.X += 1
         Me.updatePositions()
     End Sub
 
+    Public Sub Draw(ByVal WinHandle As System.IntPtr)
+        Me.updatePositions()
+        For Each p As Point In Me._squarePositions
+            DrawSquare.Draw(WinHandle, p)
+        Next
+    End Sub
 End Class
