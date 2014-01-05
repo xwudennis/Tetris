@@ -75,7 +75,6 @@
     <Compile Include="Block.vb" />
     <Compile Include="BlockType.vb" />
     <Compile Include="DrawSquare.vb" />
-    <Compile Include="MDSetBlockTypes.vb" />
     <Compile Include="TetrisGame.vb" />
     <Compile Include="VBTetris.vb">
       <SubType>Form</SubType>

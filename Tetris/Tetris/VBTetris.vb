@@ -6,18 +6,22 @@
     End Sub
 
     Private Sub VBTetris_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
-        Select Case e.KeyValue
-            Case Keys.Left
-                Game1.blockA.MoveLeft()
-            Case Keys.Right
-                Game1.blockA.MoveRight()
-            Case Keys.Up
-                Game1.blockA.Rotate()
-            Case Keys.Down
-                Game1.blockA.MoveDown()
-        End Select
-        Refresh()
-        Game1.blockA.Draw(PictureBoxGame.Handle)
+        If Game1 Is Nothing Then
+            MsgBox("Error. Tetris game hasn't been instantiated", MsgBoxStyle.Critical)
+        Else
+            Select Case e.KeyValue
+                Case Keys.Left
+                    Game1.blockA.MoveLeft()
+                Case Keys.Right
+                    Game1.blockA.MoveRight()
+                Case Keys.Up
+                    Game1.blockA.Rotate()
+                Case Keys.Down
+                    Game1.blockA.MoveDown()
+            End Select
+            Refresh()
+            Game1.blockA.Draw(PictureBoxGame.Handle)
+        End If
     End Sub
 
     Private Sub ButtonStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonStart.Click
