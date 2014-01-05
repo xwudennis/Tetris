@@ -2,8 +2,14 @@
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 
-Module MDSetBlockTypes
-    Public ListBlockTypes As List(Of BlockType)
+Public Class TetrisGame
+    Private ListBlockTypes As List(Of BlockType)
+    Public blockA As Block
+
+    Public Sub New()
+        Me.SetBlockTypes()
+        Me.blockA = New Block(ListBlockTypes, 1)
+    End Sub
 
     Public Sub SetBlockTypes()
         ListBlockTypes = New List(Of BlockType)
@@ -65,4 +71,5 @@ Module MDSetBlockTypes
         ListBlockTypes.Add(BlockZ)
 
     End Sub
-End Module
+
+End Class

@@ -92,7 +92,6 @@ Public Class Block
     End Sub
 
     Public Sub Draw(ByVal WinHandle As System.IntPtr)
-        Me.updatePositions()
         For Each p As Point In Me._squarePositions
             DrawSquare.Draw(WinHandle, p)
         Next

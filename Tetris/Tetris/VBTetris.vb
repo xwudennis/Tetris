@@ -1,31 +1,27 @@
 ﻿Public Class VBTetris
-
-    Dim blockA As Block
+    Dim Game1 As TetrisGame
 
     Private Sub VBTetris_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        SetBlockTypes()
-        blockA = New Block(ListBlockTypes, 1)
-        For Each p As Point In blockA.SquarePositions
-            Label6.Text += p.X.ToString() + " " + p.Y.ToString() + " "
-        Next
+
     End Sub
 
     Private Sub VBTetris_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
             Case Keys.Left
-                blockA.MoveLeft()
+                Game1.blockA.MoveLeft()
             Case Keys.Right
-                blockA.MoveRight()
+                Game1.blockA.MoveRight()
             Case Keys.Up
-                blockA.Rotate()
+                Game1.blockA.Rotate()
             Case Keys.Down
-                blockA.MoveDown()
+                Game1.blockA.MoveDown()
         End Select
         Refresh()
-        blockA.Draw(PictureBoxGame.Handle)
+        Game1.blockA.Draw(PictureBoxGame.Handle)
     End Sub
 
     Private Sub ButtonStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonStart.Click
+        Game1 = New TetrisGame()
         ButtonStart.Enabled = False
     End Sub
 End Class
