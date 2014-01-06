@@ -114,6 +114,7 @@ Public Class TetrisGame
         canMoveDown = Me.CurrentBlock.MoveDown(Me.Background)
         If canMoveDown = False Then
             Me.switchBlock()
+            Me.Background.RemoveCompleteLines()
         End If
     End Sub
 End Class

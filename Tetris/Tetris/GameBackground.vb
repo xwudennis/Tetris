@@ -82,4 +82,54 @@
             Next
         End If
     End Sub
+
+    Private Function checkLineComplete(ByVal y As Integer) As Boolean
+        Dim complete As Boolean = True
+        If y >= 0 And y < Me._height Then
+            For x As Integer = 0 To Me._width - 1
+                If Me.blockPile(x, y) = 0 Then
+                    complete = False
+                    Exit For
+                End If
+            Next
+        Else
+            MsgBox("Wrong Line Number", MsgBoxStyle.Critical)
+        End If
+        Return complete
+    End Function
+
+    Public Sub RemoveCompleteLines()
+        '' First, check complete lines and add to completed
+        Dim completed As New List(Of Integer)
+        For y As Integer = 0 To Me.Height() - 1
+            If checkLineComplete(y) Then
+                completed.Add(y)
+            End If
+        Next
+
+        If completed.Count() > 0 Then
+            '' Then, scan from bottom to top, move incomplete lines down
+            Dim moveDown As Integer = 0
+            For y As Integer = Me.Height() - 1 To 0 Step -1
+                Dim toFind As Integer = y
+                If completed.Exists(Function(value As Integer) value = toFind) Then
+                    '' If a line is complete
+                    moveDown += 1
+                Else
+                    '' If a line is incomplete, move it down by integer moveDown
+                    '' Note that y + moveDown is guaranteed to be smaller than Me._height
+                    For x As Integer = 0 To Me.Width() - 1
+                        Me.blockPile(x, y + moveDown) = Me.blockPile(x, y)
+                    Next
+                End If
+            Next
+
+            '' In the end, fill in the top severl lines with 0
+            For y As Integer = 0 To moveDown - 1
+                For x As Integer = 0 To Me.Width() - 1
+                    Me.blockPile(x, y) = 0
+                Next
+            Next
+        End If
+    End Sub
 End Class
