@@ -4,15 +4,13 @@ Imports System.Drawing.Drawing2D
 
 Public Class TetrisGame
     Private listBlockTypes As List(Of BlockType)
-    Private width As Integer
-    Private height As Integer
+    Public Background As GameBackground
     Public CurrentBlock As Block
     Public NextBlock As Block
 
     Public Sub New()
         Me.setListBlockTypes()
-        Me.width = 10
-        Me.height = 20
+        Me.Background = New GameBackground()
         Me.CurrentBlock = New Block(listBlockTypes, 1)
         Me.NextBlock = New Block(listBlockTypes, 3)
     End Sub

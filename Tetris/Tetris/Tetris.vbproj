@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Block.vb" />
+    <Compile Include="GameBackground.vb" />
     <Compile Include="BlockType.vb" />
     <Compile Include="DrawSquare.vb" />
     <Compile Include="TetrisGame.vb" />

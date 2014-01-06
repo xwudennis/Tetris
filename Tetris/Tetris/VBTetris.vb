@@ -20,6 +20,7 @@
                     Game1.CurrentBlock.MoveDown()
             End Select
             Refresh()
+            Game1.Background.Draw(PictureBoxGame.Handle)
             Game1.CurrentBlock.Draw(PictureBoxGame.Handle)
         End If
     End Sub
