@@ -1,6 +1,8 @@
 ﻿Public Class GameBackground
     Private _width As Integer
-    Private height As Integer
+    Private _height As Integer
+    Private _nextBlockPicWidth As Integer
+    Private _nextBlockPicHeight As Integer
     Private blockPile(,) As Integer
 
     Public ReadOnly Property Width() As Integer
@@ -9,15 +11,35 @@
         End Get
     End Property
 
+    Public ReadOnly Property Height() As Integer
+        Get
+            Return Me._height
+        End Get
+    End Property
+
+    Public ReadOnly Property NextBlockPicWidth() As Integer
+        Get
+            Return Me._nextBlockPicWidth
+        End Get
+    End Property
+
+    Public ReadOnly Property NextBlockPicHeight() As Integer
+        Get
+            Return Me._nextBlockPicHeight
+        End Get
+    End Property
+
     Public Sub New()
         Me._width = 10
-        Me.height = 20
-        Me.blockPile = New Integer(Me._width - 1, Me.height - 1) {}
+        Me._height = 20
+        Me._nextBlockPicWidth = 5
+        Me._nextBlockPicHeight = 5
+        Me.blockPile = New Integer(Me._width - 1, Me._height - 1) {}
     End Sub
 
     Public Sub Draw(ByVal WinHandle As System.IntPtr)
         For x As Integer = 0 To Me._width - 1
-            For y As Integer = 0 To Me.height - 1
+            For y As Integer = 0 To Me._height - 1
                 If blockPile(x, y) <> 0 Then
                     DrawSquare.Draw(WinHandle, x, y)
                 End If
@@ -29,7 +51,7 @@
         Dim r As Boolean = False
         For Each p As Point In b.SquarePositions()
             ''Loop through all square positions
-            If p.X >= 0 And p.X < Me._width And p.Y < Me.height Then
+            If p.X >= 0 And p.X < Me._width And p.Y < Me._height Then
                 ''First check if x is within the range and y is higher than the bottom line
                 If p.Y >= 0 Then
                     ''Then check if y is lower than the top line

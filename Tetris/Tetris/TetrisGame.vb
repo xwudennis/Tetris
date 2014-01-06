@@ -15,6 +15,7 @@ Public Class TetrisGame
         Me.CurrentBlock = New Block(listBlockTypes, randomBlockType())
         Me.CurrentBlock.StartFall(Me.Background)
         Me.NextBlock = New Block(listBlockTypes, randomBlockType())
+        Me.NextBlock.PutOnNext(Me.Background)
     End Sub
 
     Private Function randomBlockType() As Integer
@@ -107,5 +108,6 @@ Public Class TetrisGame
         CurrentBlock = NextBlock
         CurrentBlock.StartFall(Me.Background)
         NextBlock = New Block(listBlockTypes, randomBlockType())
+        NextBlock.PutOnNext(Me.Background)
     End Sub
 End Class
