@@ -11,13 +11,13 @@
         Else
             Select Case e.KeyValue
                 Case Keys.Left
-                    Game1.CurrentBlock.MoveLeft()
+                    Game1.CBMoveLeft()
                 Case Keys.Right
-                    Game1.CurrentBlock.MoveRight()
+                    Game1.CBMoveRight()
                 Case Keys.Up
-                    Game1.CurrentBlock.Rotate()
+                    Game1.CBRotate()
                 Case Keys.Down
-                    Game1.CurrentBlock.MoveDown()
+                    Game1.CBMoveDown()
             End Select
             Refresh()
             Game1.Background.Draw(PictureBoxGame.Handle)

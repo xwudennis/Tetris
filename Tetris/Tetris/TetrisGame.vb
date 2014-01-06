@@ -12,6 +12,7 @@ Public Class TetrisGame
         Me.setListBlockTypes()
         Me.Background = New GameBackground()
         Me.CurrentBlock = New Block(listBlockTypes, 1)
+        Me.CurrentBlock.StartFall(Me.Background)
         Me.NextBlock = New Block(listBlockTypes, 3)
     End Sub
 
@@ -76,4 +77,19 @@ Public Class TetrisGame
 
     End Sub
 
+    Public Sub CBMoveLeft()
+        Me.CurrentBlock.MoveLeft(Me.Background)
+    End Sub
+
+    Public Sub CBMoveRight()
+        Me.CurrentBlock.MoveRight(Me.Background)
+    End Sub
+
+    Public Sub CBRotate()
+        Me.CurrentBlock.Rotate(Me.Background)
+    End Sub
+
+    Public Sub CBMoveDown()
+        Me.CurrentBlock.MoveDown(Me.Background)
+    End Sub
 End Class

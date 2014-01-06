@@ -67,29 +67,65 @@ Public Class Block
         Me._squarePositions(BlockType.NumberOfBlocks - 1).Y = Me._center.Y
     End Sub
 
-    Public Sub Rotate()
+    Public Sub StartFall(ByRef background As GameBackground)
+        Me._center.X = background.Width() / 2
+    End Sub
+
+    Public Function Rotate(ByVal background As GameBackground)
+        Dim r As Boolean = True
+        Dim oldDirection As RotationDirections = Me._direction
         If Me._direction < 4 Then
             Me._direction += 1
         Else
             Me._direction = 1
         End If
         Me.updatePositions()
-    End Sub
+        If background.Collision(Me) Then
+            r = False
+            Me._direction = oldDirection
+            Me.updatePositions()
+        End If
+        Return r
+    End Function
 
-    Public Sub MoveDown()
+    Public Function MoveDown(ByVal background As GameBackground)
+        Dim r As Boolean = True
+        Dim oldY As Integer = Me._center.Y
         Me._center.Y += 1
         Me.updatePositions()
-    End Sub
+        If background.Collision(Me) Then
+            r = False
+            Me._center.Y = oldY
+            Me.updatePositions()
+        End If
+        Return r
+    End Function
 
-    Public Sub MoveLeft()
+    Public Function MoveLeft(ByVal background As GameBackground)
+        Dim r As Boolean = True
+        Dim oldX As Integer = Me._center.X
         Me._center.X -= 1
         Me.updatePositions()
-    End Sub
+        If background.Collision(Me) Then
+            r = False
+            Me._center.X = oldX
+            Me.updatePositions()
+        End If
+        Return r
+    End Function
 
-    Public Sub MoveRight()
+    Public Function MoveRight(ByVal background As GameBackground)
+        Dim r As Boolean = True
+        Dim oldX As Integer = Me._center.X
         Me._center.X += 1
         Me.updatePositions()
-    End Sub
+        If background.Collision(Me) Then
+            r = False
+            Me._center.X = oldX
+            Me.updatePositions()
+        End If
+        Return r
+    End Function
 
     Public Sub Draw(ByVal WinHandle As System.IntPtr)
         For Each p As Point In Me._squarePositions
