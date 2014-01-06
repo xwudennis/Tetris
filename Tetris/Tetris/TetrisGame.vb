@@ -11,10 +11,15 @@ Public Class TetrisGame
     Public Sub New()
         Me.setListBlockTypes()
         Me.Background = New GameBackground()
-        Me.CurrentBlock = New Block(listBlockTypes, 1)
+        Randomize()
+        Me.CurrentBlock = New Block(listBlockTypes, randomBlockType())
         Me.CurrentBlock.StartFall(Me.Background)
-        Me.NextBlock = New Block(listBlockTypes, 3)
+        Me.NextBlock = New Block(listBlockTypes, randomBlockType())
     End Sub
+
+    Private Function randomBlockType() As Integer
+        Return CInt(Int(listBlockTypes.Count() * Rnd()))
+    End Function
 
     Private Sub setListBlockTypes()
         listBlockTypes = New List(Of BlockType)
@@ -90,6 +95,17 @@ Public Class TetrisGame
     End Sub
 
     Public Sub CBMoveDown()
-        Me.CurrentBlock.MoveDown(Me.Background)
+        Dim canMoveDown As Boolean
+        canMoveDown = Me.CurrentBlock.MoveDown(Me.Background)
+        If canMoveDown = False Then
+            Me.switchBlock()
+        End If
+    End Sub
+
+    Private Sub switchBlock()
+        Me.Background.BlockToPile(CurrentBlock)
+        CurrentBlock = NextBlock
+        CurrentBlock.StartFall(Me.Background)
+        NextBlock = New Block(listBlockTypes, randomBlockType())
     End Sub
 End Class

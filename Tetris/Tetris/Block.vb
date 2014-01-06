@@ -69,6 +69,7 @@ Public Class Block
 
     Public Sub StartFall(ByRef background As GameBackground)
         Me._center.X = background.Width() / 2
+        Me.updatePositions()
     End Sub
 
     Public Function Rotate(ByVal background As GameBackground)
