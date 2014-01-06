@@ -19,10 +19,9 @@
                 Case Keys.Down
                     Game1.CBMoveDown()
             End Select
-            Refresh()
-            Game1.Background.Draw(PictureBoxGame.Handle)
-            Game1.CurrentBlock.Draw(PictureBoxGame.Handle)
         End If
+        Refresh()
+        Game1.Draw(PictureBoxGame.Handle, PictureBoxNext.Handle)
     End Sub
 
     Private Sub ButtonStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonStart.Click

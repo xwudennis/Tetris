@@ -70,10 +70,12 @@ Public Class Block
     Public Sub PutOnNext(ByRef background As GameBackground)
         Me._center.X = background.NextBlockPicWidth() / 2
         Me._center.Y = background.NextBlockPicHeight() / 2
+        Me.updatePositions()
     End Sub
 
     Public Sub StartFall(ByRef background As GameBackground)
         Me._center.X = background.Width() / 2
+        Me._center.Y = 0
         Me.updatePositions()
     End Sub
 

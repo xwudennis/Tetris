@@ -83,6 +83,20 @@ Public Class TetrisGame
 
     End Sub
 
+    Private Sub switchBlock()
+        Me.Background.BlockToPile(CurrentBlock)
+        CurrentBlock = NextBlock
+        CurrentBlock.StartFall(Me.Background)
+        NextBlock = New Block(listBlockTypes, randomBlockType())
+        NextBlock.PutOnNext(Me.Background)
+    End Sub
+
+    Public Sub Draw(ByVal PictureBoxGameHandle As System.IntPtr, ByVal PictureBoxNextHandle As System.IntPtr)
+        Me.Background.Draw(PictureBoxGameHandle)
+        Me.CurrentBlock.Draw(PictureBoxGameHandle)
+        Me.NextBlock.Draw(PictureBoxNextHandle)
+    End Sub
+
     Public Sub CBMoveLeft()
         Me.CurrentBlock.MoveLeft(Me.Background)
     End Sub
@@ -101,13 +115,5 @@ Public Class TetrisGame
         If canMoveDown = False Then
             Me.switchBlock()
         End If
-    End Sub
-
-    Private Sub switchBlock()
-        Me.Background.BlockToPile(CurrentBlock)
-        CurrentBlock = NextBlock
-        CurrentBlock.StartFall(Me.Background)
-        NextBlock = New Block(listBlockTypes, randomBlockType())
-        NextBlock.PutOnNext(Me.Background)
     End Sub
 End Class
