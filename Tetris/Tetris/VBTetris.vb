@@ -2,12 +2,13 @@
     Dim Game1 As TetrisGame
 
     Private Sub VBTetris_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Label2.Text = 0
+        Label4.Text = 1
     End Sub
 
     Private Sub VBTetris_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         If Game1 Is Nothing Then
-            MsgBox("Error. Tetris game hasn't been instantiated", MsgBoxStyle.Critical)
+            MsgBox("Error. Tetris game hasn't been instantiated.", MsgBoxStyle.Critical)
         Else
             Select Case e.KeyValue
                 Case Keys.Left
@@ -20,12 +21,37 @@
                     Game1.CBMoveDown()
             End Select
         End If
-        Refresh()
-        Game1.Draw(PictureBoxGame.Handle, PictureBoxNext.Handle)
+        updateFormComponentes()
     End Sub
 
     Private Sub ButtonStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonStart.Click
-        Game1 = New TetrisGame()
+        Me.StartANewGame()
         ButtonStart.Enabled = False
+    End Sub
+
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        If Game1.GameInProgress() Then
+            Game1.CBMoveDown()
+            Me.updateFormComponentes()
+        Else
+            Timer1.Enabled = False
+            MsgBox("Game Over. Do you like to start a new game?", MsgBoxStyle.YesNo, "GameOver")
+        End If
+    End Sub
+
+    Private Sub StartANewGame()
+        Game1 = New TetrisGame()
+        Timer1.Enabled = True
+        Timer1.Interval = Game1.MoveDownInteval()
+        Label2.Text = Game1.Score()
+        Label4.Text = Game1.Level()
+    End Sub
+
+    Private Sub updateFormComponentes()
+        Refresh()
+        Game1.Draw(PictureBoxGame.Handle, PictureBoxNext.Handle)
+        Timer1.Interval = Game1.MoveDownInteval()
+        Label2.Text = Game1.Score()
+        Label4.Text = Game1.Level()
     End Sub
 End Class

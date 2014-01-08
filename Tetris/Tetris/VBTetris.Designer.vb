@@ -22,6 +22,7 @@ Partial Class VBTetris
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.PictureBoxGame = New System.Windows.Forms.PictureBox()
         Me.PictureBoxNext = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -31,6 +32,7 @@ Partial Class VBTetris
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.PictureBoxGame, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBoxNext, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -117,6 +119,10 @@ Partial Class VBTetris
         Me.Label6.TabIndex = 8
         Me.Label6.Text = "Label6"
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 500
+        '
         'VBTetris
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -148,5 +154,6 @@ Partial Class VBTetris
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
 
 End Class
