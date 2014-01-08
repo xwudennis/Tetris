@@ -79,7 +79,7 @@ Public Class Block
         Me.updatePositions()
     End Sub
 
-    Public Function Rotate(ByVal background As GameBackground)
+    Public Function Rotate(ByVal background As GameBackground) As Boolean
         Dim r As Boolean = True
         Dim oldDirection As RotationDirections = Me._direction
         If Me._direction < 4 Then
@@ -96,7 +96,7 @@ Public Class Block
         Return r
     End Function
 
-    Public Function MoveDown(ByVal background As GameBackground)
+    Public Function MoveDown(ByVal background As GameBackground) As Boolean
         Dim r As Boolean = True
         Dim oldY As Integer = Me._center.Y
         Me._center.Y += 1
@@ -109,7 +109,7 @@ Public Class Block
         Return r
     End Function
 
-    Public Function MoveLeft(ByVal background As GameBackground)
+    Public Function MoveLeft(ByVal background As GameBackground) As Boolean
         Dim r As Boolean = True
         Dim oldX As Integer = Me._center.X
         Me._center.X -= 1
@@ -122,7 +122,7 @@ Public Class Block
         Return r
     End Function
 
-    Public Function MoveRight(ByVal background As GameBackground)
+    Public Function MoveRight(ByVal background As GameBackground) As Boolean
         Dim r As Boolean = True
         Dim oldX As Integer = Me._center.X
         Me._center.X += 1

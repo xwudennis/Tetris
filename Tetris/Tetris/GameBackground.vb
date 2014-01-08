@@ -1,4 +1,5 @@
 ﻿Public Class GameBackground
+    '' A class designed to store information about boundaries and the block pile
     Private _width As Integer
     Private _height As Integer
     Private _nextBlockPicWidth As Integer
@@ -48,6 +49,7 @@
     End Sub
 
     Public Function Collision(ByVal b As Block) As Boolean
+        '' Check if a block is in collision with the boundary or block pile.
         Dim r As Boolean = False
         For Each p As Point In b.SquarePositions()
             ''Loop through all square positions
@@ -74,6 +76,7 @@
     End Function
 
     Public Function BlockToPile(ByVal b As Block) As Boolean
+        '' Transform a block into the block pile.
         '' Return True if the block is within the boundary, False if out of boundary or in collision with the pile
         Dim r As Boolean = True
         '' Check if the block is in collision with the left, right, bottom boundary and the pile
@@ -93,6 +96,7 @@
     End Function
 
     Private Function checkLineComplete(ByVal y As Integer) As Boolean
+        '' Check if a certain line is complete or not
         Dim complete As Boolean = True
         If y >= 0 And y < Me._height Then
             For x As Integer = 0 To Me._width - 1
@@ -108,6 +112,7 @@
     End Function
 
     Public Function RemoveCompleteLines() As Integer
+        '' Remove all the complete lines
         '' First, check complete lines and add to completed
         Dim completed As New List(Of Integer)
         For y As Integer = 0 To Me.Height() - 1

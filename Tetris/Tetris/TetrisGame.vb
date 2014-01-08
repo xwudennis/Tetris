@@ -7,9 +7,9 @@ Public Class TetrisGame
     Private _score As Integer
     Private _gameInProgress As Boolean
     Private _listBlockTypes As List(Of BlockType)
-    Public Background As GameBackground
-    Public CurrentBlock As Block
-    Public NextBlock As Block
+    Private _background As GameBackground
+    Private _currentBlock As Block
+    Private _nextBlock As Block
 
     Public ReadOnly Property Level() As Integer
         Get
@@ -40,12 +40,12 @@ Public Class TetrisGame
         Me._score = 0
         Me._gameInProgress = True
         Me.setListBlockTypes()
-        Me.Background = New GameBackground()
+        Me._background = New GameBackground()
         Randomize()
-        Me.CurrentBlock = New Block(_listBlockTypes, randomBlockType())
-        Me.CurrentBlock.StartFall(Me.Background)
-        Me.NextBlock = New Block(_listBlockTypes, randomBlockType())
-        Me.NextBlock.PutOnNext(Me.Background)
+        Me._currentBlock = New Block(_listBlockTypes, randomBlockType())
+        Me._currentBlock.StartFall(Me._background)
+        Me._nextBlock = New Block(_listBlockTypes, randomBlockType())
+        Me._nextBlock.PutOnNext(Me._background)
     End Sub
 
     Private Function randomBlockType() As Integer
@@ -135,39 +135,39 @@ Public Class TetrisGame
     End Sub
 
     Private Sub switchBlock()
-        CurrentBlock = NextBlock
-        CurrentBlock.StartFall(Me.Background)
-        NextBlock = New Block(_listBlockTypes, randomBlockType())
-        NextBlock.PutOnNext(Me.Background)
+        _currentBlock = _nextBlock
+        _currentBlock.StartFall(Me._background)
+        _nextBlock = New Block(_listBlockTypes, randomBlockType())
+        _nextBlock.PutOnNext(Me._background)
     End Sub
 
     Public Sub Draw(ByVal PictureBoxGameHandle As System.IntPtr, ByVal PictureBoxNextHandle As System.IntPtr)
-        Me.Background.Draw(PictureBoxGameHandle)
-        Me.CurrentBlock.Draw(PictureBoxGameHandle)
-        Me.NextBlock.Draw(PictureBoxNextHandle)
+        Me._background.Draw(PictureBoxGameHandle)
+        Me._currentBlock.Draw(PictureBoxGameHandle)
+        Me._nextBlock.Draw(PictureBoxNextHandle)
     End Sub
 
     Public Sub CBMoveLeft()
-        Me.CurrentBlock.MoveLeft(Me.Background)
+        Me._currentBlock.MoveLeft(Me._background)
     End Sub
 
     Public Sub CBMoveRight()
-        Me.CurrentBlock.MoveRight(Me.Background)
+        Me._currentBlock.MoveRight(Me._background)
     End Sub
 
     Public Sub CBRotate()
-        Me.CurrentBlock.Rotate(Me.Background)
+        Me._currentBlock.Rotate(Me._background)
     End Sub
 
     Public Sub CBMoveDown()
         Dim canMoveDown As Boolean
-        canMoveDown = Me.CurrentBlock.MoveDown(Me.Background)
+        canMoveDown = Me._currentBlock.MoveDown(Me._background)
         If canMoveDown = False Then
             Dim cBWithinBoundary As Boolean
-            cBWithinBoundary = Me.Background.BlockToPile(CurrentBlock)
+            cBWithinBoundary = Me._background.BlockToPile(_currentBlock)
             If cBWithinBoundary Then
                 Me.switchBlock()
-                Dim lines As Integer = Me.Background.RemoveCompleteLines()
+                Dim lines As Integer = Me._background.RemoveCompleteLines()
                 Me.updateScore(lines)
                 Me.updateLevel()
             Else
