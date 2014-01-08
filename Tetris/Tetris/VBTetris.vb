@@ -4,6 +4,7 @@
     Private Sub VBTetris_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Label2.Text = 0
         Label4.Text = 1
+        Me.DoubleBuffered = True
     End Sub
 
     Private Sub VBTetris_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
