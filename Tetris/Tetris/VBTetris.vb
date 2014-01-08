@@ -35,7 +35,12 @@
             Me.updateFormComponentes()
         Else
             Timer1.Enabled = False
-            MsgBox("Game Over. Do you like to start a new game?", MsgBoxStyle.YesNo, "GameOver")
+            Dim response = MsgBox(String.Format("Game Over. Your score: {0}.", Game1.Score) & vbNewLine & "Would like to start a new game?", MsgBoxStyle.YesNo, "GameOver")
+            If response = MsgBoxResult.Yes Then
+                Me.StartANewGame()
+            Else
+                ''Do nothing
+            End If
         End If
     End Sub
 
